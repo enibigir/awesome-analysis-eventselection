@@ -5,9 +5,12 @@ services:
 
 before_install:
   - docker pull rootproject/root-conda:latest
-  - docker run -ti rootproject/root-conda
+  #- docker run --rm -it rootproject/root-conda
+  - docker run -d --name=mydocker rootproject/root-conda
 
 script:
-  #- bundle exec rake test
+  - docker ps -a
+  - docker exec -ti mydocker bash
   - python --version
   - root-config --version
+  - exit
