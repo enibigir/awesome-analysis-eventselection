@@ -4,8 +4,9 @@ services:
   - docker
 
 before_install:
-- docker pull rootproject/root-conda:latest
-- docker run -d rootproject/root-conda
+  - docker pull rootproject/root-conda:latest
+  - docker run -td rootproject/root-conda
 
 script:
-- root-config --version
+  - python --version
+  - root-config --version
