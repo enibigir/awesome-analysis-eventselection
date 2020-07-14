@@ -6,11 +6,12 @@ services:
 before_install:
   - docker pull rootproject/root-conda:latest
   #- docker run --rm -it rootproject/root-conda
-  - docker run -d --name=mydocker rootproject/root-conda
+  #- docker run -d --name=mydocker rootproject/root-conda
+  #- docker ps -a
 
 script:
-  - docker ps -a
-  - docker exec -ti mydocker bash
+  #- docker exec -ti mydocker bash
+  - docker run --rm -it rootproject/root-conda
   - python --version
   - root-config --version
   - exit
