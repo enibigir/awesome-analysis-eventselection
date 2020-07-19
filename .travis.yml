@@ -1,10 +1,7 @@
 language: python
 python:
-  # Conda doesn't actually use the Travis Python, but this keeps it organized.
   - "3.6"
 before_install:
-  # We do this conditionally because it saves us some downloading if the
-  # version is the same.
   - if [[ "$TRAVIS_PYTHON_VERSION" == "2.7" ]]; then
       wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh -O miniconda.sh;
     else
@@ -12,25 +9,34 @@ before_install:
     fi
   - bash miniconda.sh -b -p $HOME/miniconda
   - source "$HOME/miniconda/etc/profile.d/conda.sh"
-  - hash -r
+  #- hash -r
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q conda
 
 install:
-  # Replace dep1 dep2 ... with your dependencies
   - conda create -q -n root-env python=$TRAVIS_PYTHON_VERSION
   - conda activate root-env
   - conda install root -c conda-forge
 
 stages:
-  - skim 
+  - skim_datasets
+  - produce_histograms
+  - make_plots
 
 jobs:
   include:
-    - stage: skim
+    - stage: skim_datasets
       script:
         - mkdir -p skims
         - bash skim.sh root://eospublic.cern.ch//eos/root-eos/HiggsTauTauReduced/ skims
+    - stage: produce_histograms
+      script:
+        - mkdir -p histograms
+        - bash histograms.sh skims histograms
+    - stage: make_plots
+      script:
+        - mkdir -p $HOME/awesome-workshop/plots
+        - bash plot.sh histograms.root plots
 
 #language: ruby
 
