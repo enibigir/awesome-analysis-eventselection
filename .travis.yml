@@ -17,21 +17,20 @@ install:
   - conda create -q -n root-env python=$TRAVIS_PYTHON_VERSION
   - conda activate root-env
   - conda install root -c conda-forge
-
-stages:
-  - skim_datasets
-  - produce_histograms
-  - make_plots
+  - mkdir -p $HOME/awesome-workshop
 
 cache:
   directories:
     - $HOME/awesome-workshop
+    
+stages:
+  - skim_datasets
+  - produce_histograms
+  - make_plots
       
 jobs:
   include:
     - stage: skim_datasets
-      install:
-        - mkdir -p $HOME/awesome-workshop
       script:
         - mkdir -p $HOME/awesome-workshop/skims
         - bash skim.sh root://eospublic.cern.ch//eos/root-eos/HiggsTauTauReduced/ $HOME/awesome-workshop/skims
