@@ -28,7 +28,7 @@ jobs:
         mkdir -p skims
         bash skim.sh root://eospublic.cern.ch//eos/root-eos/HiggsTauTauReduced/ skims
 
-      uses: actions/upload-artifact@v1
+    - uses: actions/upload-artifact@v1
       with:
         name: skimmed files
         path: skims
@@ -47,7 +47,7 @@ jobs:
       - uses: actions/checkout@v2      
       - name: produce histograms
           
-        uses: actions/download-artifact@v1
+      - uses: actions/download-artifact@v1
         with:
           name: skimmed files
 
