@@ -23,20 +23,27 @@ stages:
   - produce_histograms
   - make_plots
 
+cache:
+  directories:
+    - $HOME/awesome-workshop
+      
 jobs:
   include:
     - stage: skim_datasets
+      install:
+        - mkdir -p $HOME/awesome-workshop
       script:
-        - mkdir -p skims
-        - bash skim.sh root://eospublic.cern.ch//eos/root-eos/HiggsTauTauReduced/ skims
+        - mkdir -p $HOME/awesome-workshop/skims
+        - bash skim.sh root://eospublic.cern.ch//eos/root-eos/HiggsTauTauReduced/ $HOME/awesome-workshop/skims
     - stage: produce_histograms
       script:
-        - mkdir -p histograms
-        - bash histograms.sh skims histograms
+        - mkdir -p $HOME/awesome-workshop/histograms
+        - bash histograms.sh $HOME/awesome-workshop/skims $HOME/awesome-workshop/histograms
     - stage: make_plots
       script:
         - mkdir -p $HOME/awesome-workshop/plots
-        - bash plot.sh histograms.root plots
+        - bash plot.sh histograms.root $HOME/awesome-workshop/plots
+        - ls $HOME/awesome-workshop/plots
 
 #language: ruby
 
