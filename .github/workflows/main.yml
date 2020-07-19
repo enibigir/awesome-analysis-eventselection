@@ -29,6 +29,5 @@ jobs:
       with:
         activate-conda: false
     - name: Install dependencies
-    - run: |
-        conda --version
-        which python
+    - run: conda --version
+    - run: which python
