@@ -25,6 +25,8 @@ install:
 script:
   - python --version
   - root-config --version
+  - pwd
+  - ls
 
 #language: ruby
 
