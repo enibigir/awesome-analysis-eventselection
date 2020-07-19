@@ -1,6 +1,7 @@
 language: python
 python:
   - "3.6"
+    
 before_install:
   - if [[ "$TRAVIS_PYTHON_VERSION" == "2.7" ]]; then
       wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh -O miniconda.sh;
@@ -41,8 +42,18 @@ jobs:
     - stage: make_plots
       script:
         - mkdir -p $HOME/awesome-workshop/plots
-        - bash plot.sh histograms.root $HOME/awesome-workshop/plots
+        - bash plot.sh $HOME/awesome-workshop/histograms.root $HOME/awesome-workshop/plots
         - ls $HOME/awesome-workshop/plots
+      addons:
+        artifacts:
+          debug: true
+            paths:
+              - $HOME/awesome-workshop/plots
+            target_paths: $TRAVIS_BUILD_NUMBER
+            #working_dir: WORKING_DIR
+            #bucket: simplelance
+            s3_region: us-west-1
+
 
 #language: ruby
 
