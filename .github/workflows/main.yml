@@ -12,7 +12,7 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # first job
+  # job1
   skim:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -20,11 +20,37 @@ jobs:
     container:
       image: rootproject/root-conda
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
     - name: skim datasets
       run: |
-        mkdir -p $HOME/awesome-workshop/skims
-        bash skim.sh root://eospublic.cern.ch//eos/root-eos/HiggsTauTauReduced/ $HOME/awesome-workshop/skims
+        mkdir -p skims
+        bash skim.sh root://eospublic.cern.ch//eos/root-eos/HiggsTauTauReduced/ skims
+
+      uses: actions/upload-artifact@v1
+      with:
+        name: skimmed files
+        path: skims
+
+    # job2
+    histograms:
+      # The type of runner that the job will run on
+      runs-on: ubuntu-latest
+
+    container:
+      image: rootproject/root-conda
+
+    needs: skim
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2      
+      - name: produce histograms
+          
+        uses: actions/download-artifact@v1
+        with:
+          name: skimmed files
+
+        run: |
+          mkdir -p histograms
+          bash histograms.sh skims histograms
