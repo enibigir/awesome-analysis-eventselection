@@ -22,11 +22,15 @@ install:
   - conda activate root-env
   - conda install root -c conda-forge
 
-script:
-  - python --version
-  - root-config --version
-  - pwd
-  - ls
+stages:
+  - skim 
+
+jobs:
+  include:
+    - stage: skim
+      script:
+        - mkdir -p skims
+        - bash skim.sh root://eospublic.cern.ch//eos/root-eos/HiggsTauTauReduced/ skims
 
 #language: ruby
 
