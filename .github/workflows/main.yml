@@ -25,13 +25,13 @@ jobs:
     - uses: actions/checkout@v2
     - name: skim datasets
       run: |
-        mkdir -p skims
-        bash skim.sh root://eospublic.cern.ch//eos/root-eos/HiggsTauTauReduced/ skims
+        mkdir -p $HOME/awesome-workshop/skims
+        bash skim.sh root://eospublic.cern.ch//eos/root-eos/HiggsTauTauReduced/ $HOME/awesome-workshop/skims
 
-    - uses: actions/upload-artifact@v1
+    - uses: actions/upload-artifact@v2
       with:
         name: skimmed files
-        path: skims
+        path: $HOME/awesome-workshop/skims
 
   # job2
   histograms:
@@ -45,10 +45,10 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - uses: actions/download-artifact@v1
+      - uses: actions/download-artifact@v2
         with:
           name: skimmed files
       - name: produce histograms
         run: |
-          mkdir -p histograms
-          bash histograms.sh skims histograms
+          mkdir -p $HOME/awesome-workshop/histograms
+          bash histograms.sh $HOME/awesome-workshop/skims $HOME/awesome-workshop/histograms
