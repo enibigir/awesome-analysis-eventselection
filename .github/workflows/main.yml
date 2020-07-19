@@ -32,7 +32,7 @@ jobs:
 
     - uses: actions/upload-artifact@v2
       with:
-        name: skimmed files
+        name: output
         path: skims/*.root
 
   # job2
@@ -49,13 +49,13 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/download-artifact@v2
         with:
-          name: skimmed files
+          name: output
       - name: produce histograms
         run: |
           mkdir -p histograms
-          bash histograms.sh skims histograms
+          bash histograms.sh output/skims histograms
 
-    - uses: actions/upload-artifact@v2
-      with:
-        name: produced histograms
-        path: histograms/histograms.root
+      - uses: actions/upload-artifact@v2
+        with:
+          name: output
+          path: histograms/histograms.root
