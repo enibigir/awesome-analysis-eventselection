@@ -45,10 +45,10 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - name: produce histograms
         uses: actions/download-artifact@v1
         with:
           name: skimmed files
+      - name: produce histograms
         run: |
           mkdir -p histograms
           bash histograms.sh skims histograms
