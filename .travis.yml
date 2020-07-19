@@ -39,6 +39,7 @@ jobs:
       script:
         - mkdir -p $HOME/awesome-workshop/histograms
         - bash histograms.sh $HOME/awesome-workshop/skims $HOME/awesome-workshop/histograms
+        - ls $HOME/awesome-workshop/histograms
     - stage: make_plots
       script:
         - mkdir -p $HOME/awesome-workshop/plots
