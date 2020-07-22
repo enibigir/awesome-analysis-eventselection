@@ -52,7 +52,7 @@ jobs:
       - name: produce histograms
         run: |
           pwd; ls; mkdir -p histograms
-          bash histograms.sh skims histograms
+          bash histograms.sh . histograms
 
       - uses: actions/upload-artifact@v2
         with:
