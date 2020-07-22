@@ -25,15 +25,15 @@ jobs:
     - uses: actions/checkout@v2
     - name: skim datasets
       run: |
-        mkdir -p /my-artifacts/skims
-        bash skim.sh root://eospublic.cern.ch//eos/root-eos/HiggsTauTauReduced/ /my-artifacts/skims
+        pwd; mkdir skims
+        bash skim.sh root://eospublic.cern.ch//eos/root-eos/HiggsTauTauReduced/ skims
         pwd
         ls
 
     - uses: actions/upload-artifact@v2
       with:
         name: output
-        path: /my-artifacts/skims/
+        path: skims/
 
   # job2
   histograms:
@@ -53,9 +53,9 @@ jobs:
       - name: produce histograms
         run: |
           mkdir -p histograms
-          bash histograms.sh /my-artifacts/skims /my-artifacts/histograms
+          bash histograms.sh skims histograms
 
       - uses: actions/upload-artifact@v2
         with:
           name: output
-          path: /my-artifacts/histograms/histograms.root
+          path: histograms/histograms.root
