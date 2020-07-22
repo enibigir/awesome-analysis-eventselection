@@ -58,31 +58,6 @@ jobs:
         with:
           name: output
           path: histograms/histograms.root
-
-  # job2
-  histograms:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-
-    container:
-      image: rootproject/root-conda
-
-    needs: skim
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-      - uses: actions/download-artifact@v2
-        with:
-          name: output
-      - name: produce histograms
-        run: |
-          pwd; ls; mkdir -p histograms
-          bash histograms.sh . histograms
-
-      - uses: actions/upload-artifact@v2
-        with:
-          name: output
-          path: histograms/histograms.root
   # job3
   plots:
     # The type of runner that the job will run on
