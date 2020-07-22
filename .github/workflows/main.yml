@@ -70,8 +70,8 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       - uses: actions/download-artifact@v2
-        #with:
-          #name: merged
+        with:
+          name: merged
       - name: produce plots
         run: |
           pwd; ls; mkdir -p plots
@@ -95,8 +95,8 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       - uses: actions/download-artifact@v2
-        #with:
-          #name: merged
+        with:
+          name: merged
       - name: produce plots
         run: |
           pwd; ls; mkdir -p plots
