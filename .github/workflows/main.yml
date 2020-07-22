@@ -97,9 +97,9 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: merged
-      - name: produce plots
+      - name: produce post-fit plots
         run: |
-          pwd; ls; mkdir -p plots
+          pwd; ls; mkdir -p fit
           bash fit.sh histograms.root fit
 
       - uses: actions/upload-artifact@v2
