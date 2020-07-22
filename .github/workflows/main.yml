@@ -27,7 +27,7 @@ jobs:
       run: |
         pwd; mkdir skims
         bash skim.sh root://eospublic.cern.ch//eos/root-eos/HiggsTauTauReduced/ skims
-      run: pwd;ls
+        pwd; ls
 
     - uses: actions/upload-artifact@v2
       with:
