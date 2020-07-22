@@ -27,8 +27,7 @@ jobs:
       run: |
         pwd; mkdir skims
         bash skim.sh root://eospublic.cern.ch//eos/root-eos/HiggsTauTauReduced/ skims
-        pwd
-        ls
+      run: pwd;ls
 
     - uses: actions/upload-artifact@v2
       with:
@@ -52,7 +51,7 @@ jobs:
           name: output
       - name: produce histograms
         run: |
-          mkdir -p histograms
+          pwd; ls; mkdir -p histograms
           bash histograms.sh skims histograms
 
       - uses: actions/upload-artifact@v2
