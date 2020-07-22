@@ -46,8 +46,8 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       - uses: actions/download-artifact@v2
-        #with:
-          #name: skimmed
+        with:
+          name: skimmed
       - name: produce histograms
         run: |
           pwd; ls; mkdir -p histograms
