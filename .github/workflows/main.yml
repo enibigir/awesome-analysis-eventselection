@@ -105,9 +105,4 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: post-fit
-          path: fit          
-
-notifications:
-  email:
-    on_success: never
-    on_failure: never
+          path: fit
