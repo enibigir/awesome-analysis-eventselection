@@ -70,14 +70,13 @@ jobs:
       - name: produce pre-fit plots
         run: |
           mkdir -p plots
-          python plot.py skim_ggH.root ggH plots
+          python plot.py skim_ggH.root ggH plots 1
 
       - uses: actions/upload-artifact@v2
         with:
           name: pre-fit
           path: plots
 
-  # job4
   fit:
     runs-on: ubuntu-latest
     container: rootproject/root-conda:6.18.04
@@ -90,7 +89,7 @@ jobs:
       - name: produce post-fit plots
         run: |
           mkdir -p fit
-          python plot.py skim_ggH.root fit
+          python fit.py skim_ggH.root fit
 
       - uses: actions/upload-artifact@v2
         with:
