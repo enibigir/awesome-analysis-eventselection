@@ -70,7 +70,7 @@ jobs:
       - name: produce pre-fit plots
         run: |
           mkdir -p plots
-          python plot.py skim_ggH.root ggH plots 1
+          python plot.py skim_ggH.root plots 1
 
       - uses: actions/upload-artifact@v2
         with:
@@ -88,10 +88,10 @@ jobs:
           name: histograms
       - name: produce post-fit plots
         run: |
-          mkdir -p fit
-          python fit.py skim_ggH.root fit
+          mkdir -p plots
+          python fit.py skim_ggH.root plots
 
       - uses: actions/upload-artifact@v2
         with:
           name: post-fit
-          path: fit
+          path: plots
